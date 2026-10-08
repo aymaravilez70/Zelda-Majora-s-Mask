@@ -1,0 +1,9 @@
+# Private files
+*.n64
+*.z64
+*.v64
+*.rom
+private/
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,257 @@
+Quiero desarrollar un proyecto experimental para ejecutar The Legend of Zelda: Majora's Mask directamente en un navegador web.
+
+IMPORTANTE:
+
+* Tengo una copia/ROM del juego obtenida legalmente y quiero usarla únicamente para mi propio proyecto experimental.
+* NO quiero crear una página que simplemente permita descargar la ROM.
+* Quiero que el resultado final sea una experiencia tipo:
+
+  https://miweb.com/zelda
+
+  El usuario entra al enlace y puede comenzar a jugar directamente desde el navegador.
+* No quiero que el usuario tenga que instalar un emulador, descargar un ejecutable ni realizar configuraciones manuales.
+* Quiero minimizar al máximo cualquier pantalla de carga inicial.
+* No quiero una solución basada en streaming de video/cloud gaming. El juego debe ejecutarse localmente en el navegador.
+
+OBJETIVO TÉCNICO
+
+Investiga primero cuál es actualmente la mejor arquitectura para ejecutar Majora's Mask de Nintendo 64 en navegador.
+
+Evalúa especialmente:
+
+1. WebAssembly (WASM)
+2. Emscripten
+3. WebGL / WebGPU
+4. Emulación de Nintendo 64 en navegador
+5. Proyectos de decompilación/reimplementación de Majora's Mask
+6. Posibilidad de compilar un port nativo del juego para WebAssembly
+7. Sistemas de caché y almacenamiento local del navegador para evitar descargas repetidas
+8. Service Workers y Cache API
+9. Compresión y carga eficiente de assets
+
+NO quiero que simplemente me digas "usa un emulador". Quiero que determines cuál de estas arquitecturas ofrece mejor rendimiento y experiencia.
+
+OBJETIVO DE EXPERIENCIA
+
+Quiero llegar a algo parecido a:
+
+Usuario abre:
+https://miweb.com/zelda
+
+↓
+
+Página muy ligera
+
+↓
+
+Inicialización automática del motor
+
+↓
+
+Carga de los recursos necesarios
+
+↓
+
+Juego ejecutándose dentro de un canvas
+
+↓
+
+Controles de teclado/gamepad
+
+↓
+
+Audio
+
+↓
+
+Guardar partida
+
+↓
+
+Pantalla completa opcional
+
+La segunda vez que el usuario entra debería aprovechar la caché del navegador para evitar volver a descargar todos los recursos.
+
+IMPORTANTE SOBRE LA CARGA
+
+Quiero que analices honestamente qué significa "entrar y jugar inmediatamente".
+
+No quiero que me prometas que es posible cargar varios cientos de MB mágicamente sin transferir datos.
+
+Si el navegador necesita descargar archivos, diseña la arquitectura para:
+
+* minimizar la descarga inicial;
+* comprimir archivos;
+* dividir recursos en chunks;
+* cargar primero lo indispensable;
+* cargar recursos adicionales mientras el usuario ya está jugando cuando sea técnicamente posible;
+* utilizar Service Worker;
+* utilizar Cache API / IndexedDB cuando corresponda;
+* aprovechar HTTP caching;
+* mostrar una pantalla de carga mínima y profesional únicamente cuando sea inevitable.
+
+Quiero que determines cuál es el tamaño razonable de la carga inicial y cuál sería el tamaño total aproximado del proyecto.
+
+ARQUITECTURA
+
+Quiero que diseñes una arquitectura profesional, por ejemplo:
+
+Frontend:
+
+* HTML
+* CSS
+* JavaScript/TypeScript
+* Canvas
+* WebGL/WebGPU
+
+Runtime:
+
+* WebAssembly
+
+Servidor:
+
+* archivos estáticos/CDN
+* Brotli/Gzip
+* HTTP caching
+* Service Worker
+
+Estructura aproximada:
+
+/public
+/game
+/assets
+/wasm
+/audio
+/textures
+/scripts
+
+/service-worker.js
+
+/index.html
+
+Quiero que adaptes esta estructura a la solución real que recomiendes.
+
+CONTROLES
+
+Quiero soporte para:
+
+* teclado
+* controles configurables
+* gamepad mediante Gamepad API
+* controles táctiles opcionales para móvil
+* pantalla completa
+
+GUARDADO
+
+Investiga la mejor forma de implementar:
+
+* save states si la arquitectura lo permite;
+* guardado normal del juego;
+* persistencia entre sesiones;
+* almacenamiento local;
+* recuperación después de cerrar el navegador.
+
+RENDIMIENTO
+
+El objetivo es conseguir una experiencia fluida.
+
+Analiza:
+
+* FPS
+* uso de CPU
+* uso de GPU
+* memoria
+* tiempo de carga
+* tamaño del WASM
+* tamaño de assets
+* compatibilidad con Chrome, Edge y Firefox
+* compatibilidad de escritorio y móvil
+
+Quiero que evites soluciones innecesariamente pesadas.
+
+LEGAL
+
+No quiero distribuir públicamente archivos protegidos por copyright que no tenga derecho a redistribuir.
+
+Diseña el proyecto de forma que:
+
+* el runtime/código que pueda distribuirse legalmente esté separado;
+* los archivos propietarios del juego no se incluyan en un repositorio público;
+* quede claro qué archivos debo proporcionar yo localmente;
+* si una parte del proceso requiere que yo coloque mi propia copia del juego, indícame exactamente dónde.
+
+NO quiero que inventes una solución.
+
+Si una tecnología no permite hacer algo, dilo claramente.
+
+Si existe un proyecto open source/decompilación/reimplementación que facilite muchísimo el proceso, identifícalo y explícame:
+
+* qué hace;
+* qué licencia tiene;
+* qué archivos proporciona;
+* qué tendría que aportar yo;
+* si puede compilarse a WebAssembly;
+* qué tan difícil sería adaptarlo al navegador.
+
+PLAN DE DESARROLLO
+
+Quiero que trabajemos por etapas.
+
+FASE 1:
+Determinar la arquitectura técnicamente más viable.
+
+FASE 2:
+Preparar el entorno de compilación.
+
+FASE 3:
+Conseguir una build que funcione localmente.
+
+FASE 4:
+Compilar a WebAssembly.
+
+FASE 5:
+Crear el canvas y runtime web.
+
+FASE 6:
+Implementar controles.
+
+FASE 7:
+Implementar audio.
+
+FASE 8:
+Implementar guardado.
+
+FASE 9:
+Implementar Service Worker y caché.
+
+FASE 10:
+Optimizar carga y rendimiento.
+
+FASE 11:
+Preparar deployment.
+
+FASE 12:
+Probar desde un enlace público.
+
+REGLAS PARA AYUDARME
+
+No avances 10 pasos de golpe.
+
+Primero analiza el proyecto y dime cuál es la ruta técnicamente más viable.
+
+Después dame únicamente la FASE 1 con instrucciones concretas.
+
+Cuando necesites que ejecute comandos, dame:
+
+1. El comando exacto.
+2. En qué carpeta ejecutarlo.
+3. Qué resultado debería aparecer.
+4. Qué hacer si aparece un error.
+
+Estoy usando Windows.
+
+Mi objetivo final es literalmente:
+
+ABRIR ENLACE → ESPERAR LO MÍNIMO POSIBLE → JUGAR.
+
+Quiero una solución real y técnicamente viable, no una demostración falsa ni una página que simplemente muestre un emulador vacío.
